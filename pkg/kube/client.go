@@ -63,7 +63,7 @@ func (c *Client) Create(resources kube.ResourceList) (*kube.Result, error) {
 		klog.Warning("create resource error:", err)
 		if apierrors.IsAlreadyExists(err) {
 			klog.Warningf("create error due to resource exist, do a dumb update...")
-			return c.Client.Update(resources, resources, true)
+			return c.Client.Update(nil, resources, true)
 		}
 		return result, err
 	}
