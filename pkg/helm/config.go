@@ -77,6 +77,14 @@ func newActionConfig(info *cluster.Info) (*action.Configuration, error) {
 	// hope it works
 	kc.Log = klog.Infof
 
+	if info.Name == "openshift" {
+		klog.Info("fuck debug openshift")
+		klog.Infof("cfg all: %s %s %s", cfg.Context, cfg.Namespace, cfg.Path)
+		klog.Infof("namespace %s", cfg.Namespace)
+		klog.Infof("cfg flags token: %s %s", *cfgFlags.BearerToken, *cfgFlags.Context)
+		klog.Infof("is reach: %+v", kc.IsReachable())
+	}
+
 	namespace := getNamespace(cfgFlags)
 
 	relClientSet, err := releaseclient.NewForConfig(info.ToRestConfig())
